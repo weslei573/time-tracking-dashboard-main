@@ -21,6 +21,9 @@
     --yellow: hsl(43, 84%, 65%);
 
     --bg: var(--neutral-2);
+    --time: 200ms;
+    --ease: ease-in-out;
+    --snap: cubic-bezier(0.72, -0.12, 0.24, 1.14);
 }
 
 body {
@@ -79,8 +82,9 @@ h1 {
     --txt: var(--neutral-2);
 }
 
-h1 > span {
-    font-size: .7rem;
+h1>span {
+    font-size: .8rem;
+    color: var(--neutral-4);
 }
 
 .card--avatar-bottom {
@@ -97,13 +101,31 @@ h1 > span {
 .btn {
     color: var(--neutral-3);
     font: inherit;
-    background: none;
+    background: inherit;
     border: none;
     flex: 1 1 100%;
     border-radius: .5rem;
     padding: .2rem .8rem;
+    cursor: pointer;
+    box-shadow:
+        0 0 0 -.5rem var(--bg),
+        0 0 0 -.5rem var(--avatar);
+    transition:
+        box-shadow var(--time) var(--snap),
+        color var(--time) var(--ease);
 }
 
-.btn.active {
+.btn:focus {
+    outline: none;
+}
+
+.btn:focus-within {
+    box-shadow:
+        0 0 0 .1rem var(--bg),
+        0 0 0 .4rem var(--avatar);
+
+}
+
+.btn:where(.active, :hover, :focus-within) {
     color: var(--txt);
 }
